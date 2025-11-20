@@ -1,158 +1,155 @@
 <!DOCTYPE html>
 <html lang="ru">
 <head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>👻 Habit Ghosts</title>
-    <style>
-        body {
-            font-family: "Segoe UI", Tahoma, Geneva, Verdana, sans-serif;
-            background-color: #1a1a2e;
-            color: #f0f0f0;
-            margin: 0;
-            padding: 0;
-            display: flex;
-            flex-direction: column;
-            min-height: 100vh;
-        }
-
-        header {
-            background-color: #162447;
-            padding: 20px;
-            text-align: center;
-            font-size: 1.5rem;
-            font-weight: bold;
-        }
-
-        main {
-            flex: 1;
-            padding: 20px;
-        }
-
-        .habit {
-            background-color: #1f4068;
-            padding: 12px 16px;
-            margin-bottom: 10px;
-            border-radius: 10px;
-            display: flex;
-            justify-content: space-between;
-            align-items: center;
-            transition: 0.2s all;
-        }
-
-        .habit:hover {
-            background-color: #e43f5a33;
-        }
-
-        button {
-            padding: 6px 10px;
-            border: none;
-            border-radius: 6px;
-            background-color: #e43f5a;
-            color: white;
-            font-weight: bold;
-            cursor: pointer;
-            transition: 0.2s background-color;
-        }
-
-        button:hover {
-            background-color: #ff6b81;
-        }
-
-        #addBtn {
-            margin-left: 10px;
-            background-color: #08d9d6;
-            color: #162447;
-        }
-
-        #addHabitForm {
-            display: flex;
-            margin-bottom: 15px;
-        }
-
-        #habitInput {
-            flex: 1;
-            padding: 8px 12px;
-            border-radius: 6px;
-            border: none;
-            font-size: 1rem;
-        }
-
-        footer {
-            padding: 10px;
-            text-align: center;
-            font-size: 0.85rem;
-            background-color: #162447;
-        }
-    </style>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>👻 Habit Ghosts</title>
+<style>
+body {
+    font-family: "Segoe UI", Tahoma, Geneva, Verdana, sans-serif;
+    background-color: #1a1a2e;
+    color: #f0f0f0;
+    margin: 0;
+    padding: 0;
+    display: flex;
+    flex-direction: column;
+    min-height: 100vh;
+}
+header {
+    background-color: #162447;
+    padding: 20px;
+    text-align: center;
+    font-size: 1.5rem;
+    font-weight: bold;
+}
+main {
+    flex: 1;
+    padding: 20px;
+}
+#addHabitForm {
+    display: flex;
+    margin-bottom: 15px;
+}
+#habitInput {
+    flex: 1;
+    padding: 10px;
+    border-radius: 6px;
+    border: none;
+    font-size: 1rem;
+}
+#addBtn {
+    margin-left: 10px;
+    padding: 10px;
+    border: none;
+    border-radius: 6px;
+    background-color: #08d9d6;
+    color: #162447;
+    font-weight: bold;
+    cursor: pointer;
+}
+#addBtn:hover {
+    background-color: #00f0f0;
+}
+.habit {
+    background-color: #1f4068;
+    padding: 12px 16px;
+    margin-bottom: 10px;
+    border-radius: 10px;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+}
+.habit button {
+    padding: 6px 10px;
+    border: none;
+    border-radius: 6px;
+    background-color: #e43f5a;
+    color: white;
+    font-weight: bold;
+    cursor: pointer;
+}
+.habit button:hover {
+    background-color: #ff6b81;
+}
+footer {
+    padding: 10px;
+    text-align: center;
+    font-size: 0.85rem;
+    background-color: #162447;
+}
+</style>
 </head>
 <body>
 
 <header>👻 Habit Ghosts</header>
 
 <main>
-    <form id="addHabitForm">
-        <input type="text" id="habitInput" placeholder="Введите привычку..." />
-        <button type="submit" id="addBtn">Добавить</button>
-    </form>
+<form id="addHabitForm">
+    <input type="text" id="habitInput" placeholder="Введите привычку..." />
+    <button type="submit" id="addBtn">Добавить</button>
+</form>
 
-    <div id="habits"></div>
+<div id="habits"></div>
 </main>
 
 <footer>Telegram Mini App Demo</footer>
 
 <script>
-    const habits = [];
+const habits = [];
 
-    const habitInput = document.getElementById("habitInput");
-    const addForm = document.getElementById("addHabitForm");
-    const habitsContainer = document.getElementById("habits");
+const habitInput = document.getElementById("habitInput");
+const addForm = document.getElementById("addHabitForm");
+const habitsContainer = document.getElementById("habits");
 
-    function render() {
-        habitsContainer.innerHTML = "";
+function render() {
+    habitsContainer.innerHTML = "";
 
-        if (habits.length === 0) {
-            const p = document.createElement("p");
-            p.style.textAlign = "center";
-            p.style.color = "#aaa";
-            p.textContent = "Пока нет привычек. Добавьте первую!";
-            habitsContainer.appendChild(p);
-            return;
-        }
-
-        habits.forEach((habit, i) => {
-            const div = document.createElement("div");
-            div.className = "habit";
-
-            const span = document.createElement("span");
-            span.textContent = habit;
-
-            const delBtn = document.createElement("button");
-            delBtn.textContent = "Удалить";
-            delBtn.onclick = () => {
-                habits.splice(i, 1);
-                render();
-            };
-
-            div.appendChild(span);
-            div.appendChild(delBtn);
-            habitsContainer.appendChild(div);
-        });
+    if (habits.length === 0) {
+        const p = document.createElement("p");
+        p.style.textAlign = "center";
+        p.style.color = "#aaa";
+        p.textContent = "Пока нет привычек. Добавьте первую!";
+        habitsContainer.appendChild(p);
+        return;
     }
 
-    // Обработка формы
-    addForm.addEventListener("submit", (e) => {
-        e.preventDefault(); // предотвращаем перезагрузку страницы
-        const value = habitInput.value.trim();
-        if (value !== "") {
-            habits.push(value);
-            habitInput.value = ""; // очищаем поле
-            render();
-        }
-    });
+    habits.forEach((habit, i) => {
+        const div = document.createElement("div");
+        div.className = "habit";
 
-    render();
+        const span = document.createElement("span");
+        span.textContent = habit;
+
+        const delBtn = document.createElement("button");
+        delBtn.textContent = "Удалить";
+        delBtn.onclick = () => {
+            habits.splice(i, 1);
+            render();
+        };
+
+        div.appendChild(span);
+        div.appendChild(delBtn);
+        habitsContainer.appendChild(div);
+    });
+}
+
+// Обработка формы
+addForm.addEventListener("submit", (e) => {
+    e.preventDefault(); // предотвращаем перезагрузку страницы
+    const value = habitInput.value.trim();
+    if (value !== "") {
+        habits.push(value);
+        habitInput.value = ""; // очищаем поле
+        render();
+    }
+});
+
+render();
 </script>
+
+</body>
+</html>
+
 
 </body>
 </html>
