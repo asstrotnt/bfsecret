@@ -1,0 +1,58 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <meta charset="UTF-8">
+    <title>Habit Ghosts</title>
+    <style>
+        body {
+            font-family: sans-serif;
+            padding: 20px;
+        }
+        .habit {
+            padding: 10px;
+            background: #f2f2f2;
+            margin-bottom: 10px;
+            border-radius: 8px;
+        }
+    </style>
+</head>
+<body>
+
+<h1>👻 Habit Ghosts</h1>
+
+<div id="habits"></div>
+
+<button id="addBtn">Добавить привычку</button>
+
+<script>
+    const habits = [];
+
+    function render() {
+        const container = document.getElementById("habits");
+        container.innerHTML = "";
+        habits.forEach((h, i) => {
+            const div = document.createElement("div");
+            div.className = "habit";
+            div.innerHTML = h + " <button onclick='removeHabit(" + i + ")'>Удалить</button>";
+            container.appendChild(div);
+        });
+    }
+
+    document.getElementById("addBtn").onclick = () => {
+        const h = prompt("Введите привычку:");
+        if (h) {
+            habits.push(h);
+            render();
+        }
+    };
+
+    function removeHabit(i) {
+        habits.splice(i, 1);
+        render();
+    }
+
+    render();
+</script>
+
+</body>
+</html>
