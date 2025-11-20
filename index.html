@@ -1,28 +1,93 @@
 <!DOCTYPE html>
-<html>
+<html lang="ru">
 <head>
     <meta charset="UTF-8">
-    <title>Habit Ghosts</title>
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>👻 Habit Ghosts</title>
     <style>
         body {
-            font-family: sans-serif;
+            font-family: "Segoe UI", Tahoma, Geneva, Verdana, sans-serif;
+            background-color: #1a1a2e;
+            color: #f0f0f0;
+            margin: 0;
+            padding: 0;
+            display: flex;
+            flex-direction: column;
+            min-height: 100vh;
+        }
+
+        header {
+            background-color: #162447;
+            padding: 20px;
+            text-align: center;
+            font-size: 1.5rem;
+            font-weight: bold;
+        }
+
+        main {
+            flex: 1;
             padding: 20px;
         }
+
         .habit {
-            padding: 10px;
-            background: #f2f2f2;
+            background-color: #1f4068;
+            padding: 12px 16px;
             margin-bottom: 10px;
-            border-radius: 8px;
+            border-radius: 10px;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            transition: 0.2s all;
+        }
+
+        .habit:hover {
+            background-color: #e43f5a33;
+        }
+
+        button {
+            padding: 6px 10px;
+            border: none;
+            border-radius: 6px;
+            background-color: #e43f5a;
+            color: white;
+            font-weight: bold;
+            cursor: pointer;
+            transition: 0.2s background-color;
+        }
+
+        button:hover {
+            background-color: #ff6b81;
+        }
+
+        #addBtn {
+            width: 100%;
+            margin-top: 15px;
+            background-color: #08d9d6;
+            color: #162447;
+        }
+
+        #addBtn:hover {
+            background-color: #00f0f0;
+        }
+
+        footer {
+            padding: 10px;
+            text-align: center;
+            font-size: 0.85rem;
+            background-color: #162447;
         }
     </style>
 </head>
 <body>
 
-<h1>👻 Habit Ghosts</h1>
+<header>👻 Habit Ghosts</header>
 
-<div id="habits"></div>
+<main>
+    <div id="habits"></div>
+    <button id="addBtn">Добавить привычку</button>
+</main>
 
-<button id="addBtn">Добавить привычку</button>
+<footer>Telegram Mini App Demo</footer>
 
 <script>
     const habits = [];
@@ -30,26 +95,43 @@
     function render() {
         const container = document.getElementById("habits");
         container.innerHTML = "";
-        habits.forEach((h, i) => {
+
+        if (habits.length === 0) {
+            const p = document.createElement("p");
+            p.style.textAlign = "center";
+            p.style.color = "#aaa";
+            p.textContent = "Пока нет привычек. Добавьте первую!";
+            container.appendChild(p);
+            return;
+        }
+
+        habits.forEach((habit, i) => {
             const div = document.createElement("div");
             div.className = "habit";
-            div.innerHTML = h + " <button onclick='removeHabit(" + i + ")'>Удалить</button>";
+
+            const span = document.createElement("span");
+            span.textContent = habit;
+
+            const delBtn = document.createElement("button");
+            delBtn.textContent = "Удалить";
+            delBtn.onclick = () => {
+                habits.splice(i, 1);
+                render();
+            };
+
+            div.appendChild(span);
+            div.appendChild(delBtn);
             container.appendChild(div);
         });
     }
 
     document.getElementById("addBtn").onclick = () => {
         const h = prompt("Введите привычку:");
-        if (h) {
-            habits.push(h);
+        if (h && h.trim() !== "") {
+            habits.push(h.trim());
             render();
         }
     };
-
-    function removeHabit(i) {
-        habits.splice(i, 1);
-        render();
-    }
 
     render();
 </script>
