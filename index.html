@@ -1,60 +1,35 @@
 <!DOCTYPE html>
-<html lang="en">
+<html>
 <head>
-  <meta charset="UTF-8">
-  <title>Registration</title>
-  <script src="https://cdn.tailwindcss.com"></script>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>PKgang</title>
+        
 </head>
-<body class="bg-gray-900 text-white flex items-center justify-center h-screen">
+<body>
 
-<div class="bg-gray-800 p-6 rounded-lg w-80 shadow-lg">
-  <h2 class="text-2xl font-bold mb-4 text-center">Setup Your Profile</h2>
+    <nav>
+        <a href="#" class="logo">PKgang</a>
+        <div class="links">
+            <a href="#">О нас</a>
+            <a href="#">Премиум</a>
+            <a href="#">Поддержка</a>
+        </div>
+    </nav>
 
-  <!-- Цель -->
-  <label class="block mb-2 font-medium">Your Goal:</label>
-  <select id="userGoal" class="w-full mb-4 p-2 rounded text-black">
-    <option value="lose">Lose Weight</option>
-    <option value="gain">Gain Muscle</option>
-    <option value="maintain">Maintain</option>
-  </select>
+    <header>
+        <div
+            class="left">
+                <h1>Считайте каллории, бжу и следите за своим питанием вместе <span>с PKgang!</span></h1>
+                <p>Соревнуйтесь с другими людьми по всему миру! Предлагаем систему баллов которые будут зачисляться за выполенные задания и заполнение завтрака обеда и ужина в течении недели</p>
+                <button id="install">Скачать PKgang </button>
+                <button id="tg">Телеграмм mini app</button>
+        </div>
+        <img src="iphone.png" alt="Iphone" class="iphone-img">
+    </header>
 
-  <!-- Вес -->
-  <label class="block mb-2 font-medium">Your Weight: <span id="weightValue">70</span> kg</label>
-  <input type="range" min="0" max="200" value="70" id="userWeight" class="w-full mb-4">
-
-  <button id="saveUser" class="w-full bg-blue-800 hover:bg-blue-600 text-white font-bold py-2 px-4 rounded transition-all duration-300 active:scale-95">
-    Save
-  </button>
-</div>
-
-<script>
-  const weightSlider = document.getElementById("userWeight");
-  const weightValue = document.getElementById("weightValue");
-
-  // Динамически обновляем цифру при движении ползунка
-  weightSlider.addEventListener("input", () => {
-    weightValue.textContent = weightSlider.value;
-  });
-
-  // Пример отправки данных на сервер
-  document.getElementById("saveUser").addEventListener("click", async () => {
-    const goal = document.getElementById("userGoal").value;
-    const weight = weightSlider.value;
-
-    await fetch("/register", {
-      method: "POST",
-      headers: { "Content-Type": "application/x-www-form-urlencoded" },
-      body: new URLSearchParams({
-        user_id: telegramUserId, // получаем из Telegram WebApp SDK
-        weight: weight,
-        target: goal
-      })
-    });
-
-    // Перенаправление на базовую страницу
-    window.location.href = `/home?user_id=${telegramUserId}`;
-  });
-</script>
-
+    <link rel="stylesheet" href="styles.css">
+    <script src="script.js"></script>
 </body>
+
 </html>
